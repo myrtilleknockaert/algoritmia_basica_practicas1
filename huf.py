@@ -23,7 +23,7 @@ def main():
     elif args.decompress:
         input_file = args.decompress
         if not input_file.endswith(".huf"):
-            print("❌ Error: Input file must have .huf extension for decompression.")
+            print("Error: Input file must have .huf extension for decompression.")
             return
 
         output_file = input_file.replace(".huf", ".orig")

@@ -32,7 +32,10 @@ def dictionary_to_list(letter_counts: dict) -> list:
     return lst
 
 
-def build_tree(lst):
+def build_tree(lst: list) -> list:
+    """
+    buid a huffman tree from a list of lists
+    """
     while len(lst) > 1:
         first = lst.pop(0)
         second = lst.pop(0)
@@ -56,7 +59,7 @@ def generate_huffman_codes(tree, final_dict, code):
     return final_dict
 
 
-def write_compressed(content, path, final_dict):
+def write_compressed(content, final_dict):
     with open("test2.txt", "w", encoding="utf-8") as f:
         for letter, code in final_dict.items():
             if letter == " ":
@@ -72,22 +75,29 @@ def write_compressed(content, path, final_dict):
 
 
 def compress_file(input_path, output_path):
-    """Lit un fichier, compresse son contenu avec Huffman et stocke l’arbre en en-tête"""
+    """
+    read the file, count the frequency of each letter, build the huffman tree, generate the huffman codes and compress the text
+    """
     with open(input_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    frequencies = count_letters(content)  # Étape 1 : Compter la fréquence des lettres
-    sorted_list = dictionary_to_list(frequencies)  # Étape 2 : Générer la liste triée
-    huffman_tree = build_tree(sorted_list)  # Étape 3 : Construire l'arbre Huffman
-    huffman_codes = generate_huffman_codes(huffman_tree[0], {}, "")  # Étape 4 : Générer les codes
+    frequencies = count_letters(content)  # step 1: count the frequency of each letter
+    sorted_list = dictionary_to_list(
+        frequencies
+    )  # step 2: convert the dictionary to a list and sort it
+    huffman_tree = build_tree(sorted_list)  # step 3: build the huffman tree
+    huffman_codes = generate_huffman_codes(
+        huffman_tree[0], {}, ""
+    )  # step 4: generate the huffman codes
 
-    compressed_text = "".join(huffman_codes[c] for c in content)  # Étape 5 : Encoder le texte
+    compressed_text = "".join(
+        huffman_codes[c] for c in content
+    )  # step 5: compress the text
 
     with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(huffman_codes, f)  # Sauvegarde de la table de codage en en-tête
-        f.write("\n")  # Séparation entre l'en-tête et le texte compressé
+        json.dump(huffman_codes, f)  # save the huffman tree in the header
+        f.write("\n")  # separate the header from the compressed text
         f.write(compressed_text)
-
 
 
 def reverse_dictionary(dictionary: dict) -> dict:
@@ -110,52 +120,18 @@ def write_decompressed(text, path: str):
         f.write(text)
 
 
-# def decompress_file(path):
-#     with open("test2.txt", "r", encoding="utf-8") as f:
-#         line = f.readline()
-#         elements = line.strip().split()
-
-#         # verify that the list har a pair number of elements
-#         if len(elements) % 2 != 0:
-#             raise ValueError("Error: Huffman table in test2.txt is malformed.")
-
-#         dictionary = {}
-#         i = 0
-#         while i < len(elements):
-#             char = elements[i]
-#             code = elements[i + 1]
-
-#             # replace special indicators
-#             if char == "<SPACE>":
-#                 char = " "
-#             elif char == "<NEWLINE>":
-#                 char = "\n"
-
-#             dictionary[char] = code
-#             i += 2  # jump to the next pair
-
-#         encoded_text = f.read()
-#         reverse_dict = reverse_dictionary(dictionary)
-#         decoded_text = decode_text(reverse_dict, encoded_text)
-
-#         # verify that the decoded text is the same as the original text
-#         print(f"Decoded text: {repr(decoded_text)}")
-
-#         write_decompressed(decoded_text, path)
-
-
 def decompress_file(input_path, output_path):
-    """Lit un fichier compressé (.huf), récupère l’arbre Huffman et décompresse le texte"""
+    """read a compressed file (.huf), get the huffmantree et decode the text"""
     with open(input_path, "r", encoding="utf-8") as f:
-        # Lire l'arbre Huffman depuis l'en-tête
+        # read the huffman tree from the header
         huffman_tree = json.loads(f.readline().strip())
 
         compressed_text = f.read()
 
-    # Inverser la table de Huffman pour décoder
+    # inverse the huffman tree to decode the text
     reverse_tree = {code: char for char, code in huffman_tree.items()}
 
-    # Décoder le texte
+    # decode the text
     buffer = ""
     decompressed_text = ""
     for bit in compressed_text:
@@ -166,21 +142,3 @@ def decompress_file(input_path, output_path):
 
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(decompressed_text)
-
-
-# def test_huffman():
-#     test_input = "test_input.txt"
-#     test_output = "test_output.txt"
-#     test_text = "hello huffman compression"
-
-#     with open(test_input, "w", encoding="utf-8") as f:
-#         f.write(test_text)
-
-#     compress_file(test_input, test_output)
-#     decompress_file(test_output)
-
-#     with open(test_output, "r", encoding="utf-8") as f:
-#         decompressed_text = f.read()
-
-#     assert decompressed_text == test_text, "Decompression did not match original text!"
-#     print("Test passed: Huffman compression and decompression work correctly.")

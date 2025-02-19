@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Vérifier que l'argument est fourni
+# verify that the arguments are correct
 if [ "$#" -lt 2 ]; then
     echo "Usage: $0 -c <file>  (to compress)"
     echo "       $0 -d <file.huf>  (to decompress)"
