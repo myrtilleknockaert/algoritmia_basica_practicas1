@@ -1,15 +1,15 @@
-# 📌 Proyecto de compresión Huffman
+# 📌 Practica 1: Algoritmos Voraces
 
-## 📌 1. Presentación del proyecto
+## 📌 1. Presentación del practica
 Este proyecto implementa un **compresor y descompresor de archivos basado en el algoritmo Huffman**.
 El objetivo es reducir el tamaño de los archivos mediante el uso de una **codificación óptima sin pérdida**.
 
 ## 📌 2. Características
-* Compresión de archivos de texto o binarios**
-* Descomprimir archivos comprimidos (`.huf`)**
-* Gestión de caracteres especiales (acentos, espacios, etc.)**
-* Opción de codificación Huffman con longitud limitada (`-l <L>`)**
-* Automatización de compilación y pruebas (`ejecutar.sh`)**
+* Compresión de archivos de texto o binarios
+* Descomprimir archivos comprimidos (`.huf`)
+* Gestión de caracteres especiales (acentos, espacios, etc.)
+* Opción de codificación Huffman con longitud limitada (`-l <L>`)
+* Automatización de compilación y pruebas (`ejecutar.sh`)
 
 ---
 
@@ -22,3 +22,24 @@ El archivo contiene:
 - **📜 `ejecutar.sh`** → Automatización de compilación y pruebas.
 - **📜 `my_text.txt`** → Archivo de ejemplo para probar.
 - **📜 `report.pdf`** → Análisis de rendimiento y resultados.
+
+---
+## 📌 4. Instrucciones de uso
+#### 🔹 Compresión
+```sh
+./ejecutar.sh -c mon_texte.txt
+```
+✔ Produce `my_text.txt.huf` (archivo comprimido).
+
+#### 🔹 Descompresión
+```sh
+./ejecutar.sh -d mon_texte.txt.huf
+```
+✔ Produce `my_text.txt.orig` (archivo restaurado).
+
+#### 🔹 Comprobación de integridad
+Comparar archivos:
+```sh
+diff mon_texte.txt mon_texte.txt.orig
+```
+✅ **Si no aparece ningún mensaje, ¡la compresión y descompresión funcionan correctamente!**
