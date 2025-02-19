@@ -29,13 +29,13 @@ El archivo contiene:
 ```sh
 ./ejecutar.sh -c mon_texte.txt
 ```
-✔ Produce `my_text.txt.huf` (archivo comprimido).
+Produce `my_text.txt.huf` (archivo comprimido).
 
 ###  Descompresión
 ```sh
 ./ejecutar.sh -d mon_texte.txt.huf
 ```
-✔ Produce `my_text.txt.orig` (archivo restaurado).
+Produce `my_text.txt.orig` (archivo restaurado).
 
 ### Comprobación de integridad
 Comparar archivos:
