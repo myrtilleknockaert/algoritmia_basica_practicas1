@@ -5,11 +5,11 @@ Este proyecto implementa un **compresor y descompresor de archivos basado en el 
 El objetivo es reducir el tamaño de los archivos mediante el uso de una **codificación óptima sin pérdida**.
 
 ## 📌 2. Características
-✔ **Compresión de archivos de texto o binarios**
-✔ **Descomprimir archivos comprimidos (`.huf`)**
-✔ **Gestión de caracteres especiales (acentos, espacios, etc.)**
-✔ **Opción de codificación Huffman con longitud limitada (`-l <L>`)**
-✔ **Automatización de compilación y pruebas (`ejecutar.sh`)**
+* Compresión de archivos de texto o binarios**
+* Descomprimir archivos comprimidos (`.huf`)**
+* Gestión de caracteres especiales (acentos, espacios, etc.)**
+* Opción de codificación Huffman con longitud limitada (`-l <L>`)**
+* Automatización de compilación y pruebas (`ejecutar.sh`)**
 
 ---
 
