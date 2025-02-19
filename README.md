@@ -25,21 +25,21 @@ El archivo contiene:
 
 ---
 ## 📌 4. Instrucciones de uso
-#### 🔹 Compresión
+### Compresión
 ```sh
 ./ejecutar.sh -c mon_texte.txt
 ```
 ✔ Produce `my_text.txt.huf` (archivo comprimido).
 
-#### 🔹 Descompresión
+###  Descompresión
 ```sh
 ./ejecutar.sh -d mon_texte.txt.huf
 ```
 ✔ Produce `my_text.txt.orig` (archivo restaurado).
 
-#### 🔹 Comprobación de integridad
+### Comprobación de integridad
 Comparar archivos:
 ```sh
 diff mon_texte.txt mon_texte.txt.orig
 ```
-✅ **Si no aparece ningún mensaje, ¡la compresión y descompresión funcionan correctamente!**
+ **Si no aparece ningún mensaje, ¡la compresión y descompresión funcionan correctamente!**
