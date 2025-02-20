@@ -3,7 +3,9 @@ import math
 
 
 def insertion_sort(liste: list[list]) -> list[list]:
-    """Tri par insertion basé sur la fréquence des caractères"""
+    """
+    sort the list of lists by the first element of each list
+    """
     for i in range(1, len(liste)):
         x = liste[i]
         j = i - 1
@@ -15,7 +17,9 @@ def insertion_sort(liste: list[list]) -> list[list]:
 
 
 def step_1(liste: list[list], L: int) -> list[list]:
-    """Assure que la longueur maximale des codes Huffman ne dépasse pas L"""
+    """
+    Limit the maximum length of the code to L
+    """
     for i in range(len(liste) - 1, -1, -1):
         if liste[i][0] > L:
             liste[i][0] = L
@@ -23,12 +27,16 @@ def step_1(liste: list[list], L: int) -> list[list]:
 
 
 def kraft(liste: list[list]) -> float:
-    """Calcule la somme de Kraft pour vérifier si les longueurs de code sont valides"""
+    """
+    Calculate the Kraft sum of the code
+    """
     return sum(2 ** (-element[0]) for element in liste)
 
 
 def step_2(liste: list[list], kraft_sum: float, L: int) -> tuple[list[list], float]:
-    """Ajuste les longueurs de code pour respecter la contrainte de Kraft"""
+    """
+    Adjust the lengths to respect the Kraft inequality
+    """
     for i in range(len(liste) - 1, 0, -1):
         while (kraft_sum - 2 ** (-liste[i][0]) + 2 ** (-liste[i][0] + 1) > 1) and (
             liste[i][0] < L
@@ -39,7 +47,7 @@ def step_2(liste: list[list], kraft_sum: float, L: int) -> tuple[list[list], flo
 
 
 def step_3(liste: list[list], kraft_sum: float) -> tuple[list[list], float]:
-    """Réajuste les longueurs pour optimiser la distribution"""
+    """Adjust the lengths to optimize the distribution"""
     for i in range(len(liste)):
         while (
             kraft_sum - 2 ** (-liste[i][0]) + 2 ** (-(liste[i][0] - 1)) <= 1
@@ -51,25 +59,25 @@ def step_3(liste: list[list], kraft_sum: float) -> tuple[list[list], float]:
 
 
 def compression_L(input_path: str, L: int) -> None:
-    """Effectue la compression avec une longueur de code maximale L"""
+    """do the compression with the given length L"""
     with open(input_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    # Calcul des fréquences des caractères
+    # count the frequency of each character
     frequencies: dict[str, int] = {char: content.count(char) for char in set(content)}
     liste: list[list] = [[freq, char] for char, freq in frequencies.items()]
 
-    # Tri des fréquences
+    # sort the list by frequency
     liste = insertion_sort(liste)
 
-    # Limitation des longueurs maximales à L
+    # limit the maximum length of the code to L
     liste = step_1(liste, L)
 
-    # Vérification et ajustement avec Kraft
+    # verification and correction of the Kraft inequality
     kraft_sum: float = kraft(liste)
     liste, kraft_sum = step_2(liste, kraft_sum, L)
 
-    # Vérifier si la distribution est toujours correcte
+    # verify is the distribution is still possible
     if kraft(liste) > 1:
         print("Impossible to compress with L =", L)
     else:
@@ -77,7 +85,7 @@ def compression_L(input_path: str, L: int) -> None:
         print("Compression done with that lenght :", L)
         print("Final lenght :", liste)
 
-        # Enregistrer la compression dans un fichier temporaire
+        # save the results in a file
         output_file: str = input_path + ".huf"
         with open(output_file, "w", encoding="utf-8") as f:
             for char, length in liste:

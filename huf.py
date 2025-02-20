@@ -1,6 +1,6 @@
 import argparse
 import os
-from ej import compress_file, decompress_file
+from functions import compress_file, decompress_file
 
 
 def main():
