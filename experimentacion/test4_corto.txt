@@ -1,1 +1,1 @@
-compresión de Huffman prueba
+La compresión de Huffman es útil para archivos de texto en español, ¡sí!
