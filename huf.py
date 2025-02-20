@@ -1,7 +1,5 @@
 import argparse
-import os
 from functions import compress_file, decompress_file
-
 
 def main():
     parser = argparse.ArgumentParser(
@@ -36,7 +34,6 @@ def main():
         print(
             "Error: You must specify either -c for compression or -d for decompression."
         )
-
 
 if __name__ == "__main__":
     main()
