@@ -71,11 +71,11 @@ def compression_L(input_path: str, L: int) -> None:
 
     # Vérifier si la distribution est toujours correcte
     if kraft(liste) > 1:
-        print("Impossible de respecter la contrainte L avec cette distribution")
+        print("Impossible to compress with L =", L)
     else:
-        liste, kraft_sum = step_3(liste, kraft_sum, L)
-        print("Compression optimisée avec une longueur max de", L)
-        print("Longueurs finales des codes :", liste)
+        liste, kraft_sum = step_3(liste, kraft_sum)
+        print("Compression done with that lenght :", L)
+        print("Final lenght :", liste)
 
         # Enregistrer la compression dans un fichier temporaire
         output_file: str = input_path + ".huf"
@@ -93,7 +93,7 @@ if __name__ == "__main__":
         sys.exit(1)
 
     input_file: str = sys.argv[1]
-    max_length: int = int(sys.argv[2]) # on converti le L en entier
+    max_length: int = int(sys.argv[2])  # on converti le L en entier
 
     print(f"Exécution de la compression avec L = {max_length} sur {input_file}")
     compression_L(input_file, max_length)
