@@ -1,5 +1,7 @@
 #!/bin/bash
 
+chmod +x "$0"
+
 # verify that the arguments are correct
 if [ "$#" -lt 2 ]; then
     echo "Usage: $0 -c <file>  (to compress)"
