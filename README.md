@@ -25,6 +25,10 @@ El archivo contiene:
 
 ---
 ## 📌 4. Instrucciones de uso
+### Conceder derechos de ejecución
+```sh
+chmod +x ejecutar.sh 
+`````
 ### Compresión
 ```sh
 ./ejecutar.sh -c <nombre de fichero>
