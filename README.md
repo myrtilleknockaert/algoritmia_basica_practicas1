@@ -37,6 +37,12 @@ Produce `nombre de fichero.huf` (archivo comprimido).
 ```
 Produce `nombre de fichero.orig` (archivo restaurado).
 
+### Compresión con longitud limitada
+```sh
+./ejecutar.sh -l <longitud máxima> -c <nombre de fichero>
+```
+Produce `nombre de fichero.huf`
+
 ## 📌 5. Comprobación de integridad 
 Comparar archivos:
 ```sh
