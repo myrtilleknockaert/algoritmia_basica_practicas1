@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Check if Python3 is installed, if not, install it
 if ! command -v python3 &> /dev/null; then
     echo "Python3 is not installed. Installing it now..."
@@ -29,7 +28,7 @@ fi
 
 # Declare script variables
 HUFFMAN_SCRIPT="huf.py"
-LENGTH_SCRIPT="length.py"
+LENGTH_SCRIPT="mejoras.py"
 MAX_LENGTH=""
 FILE=""
 MODE=""
@@ -77,8 +76,13 @@ fi
 if [ "$MODE" == "compress" ]; then
     if [ -n "$MAX_LENGTH" ]; then
         echo "Compressing '$FILE' with max length $MAX_LENGTH..."
-        python3 "$LENGTH_SCRIPT" "$FILE" "$MAX_LENGTH"
-        echo "Compression with limited length complete: '$FILE.huf'"
+        if python3 "$LENGTH_SCRIPT" "$FILE" "$MAX_LENGTH"; then
+            echo "Executing standard compression after length-limited compression..."
+            python3 "$HUFFMAN_SCRIPT" -c "$FILE"
+            echo "Compression complete: '$FILE.huf'"
+        else
+            echo "Compression with max length failed, skipping standard compression."
+        fi
     else
         echo "Compressing '$FILE'..."
         python3 "$HUFFMAN_SCRIPT" -c "$FILE"
