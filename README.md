@@ -14,7 +14,7 @@ El objetivo es reducir el tamaño de los archivos mediante el uso de una **codif
 ---
 
 ## 📌 3. Organización de archivos
-### 📂 `practica1_NIA1_NIA2/`
+### 📂 `practica1_950123_950134/`
 El archivo contiene:
 - **📜 `README.md`** → Explicación del proyecto (este archivo).
 - **📜 `huf.py`** → Script principal para comprimir/descomprimir.
@@ -32,18 +32,22 @@ chmod +x ejecutar.sh
 ### Compresión
 ```sh
 ./ejecutar.sh -c <nombre de fichero>
+./ejecutar.sh -c experimentacion/test5_largo.txt           
 ```
 Produce `nombre de fichero.huf` (archivo comprimido).
 
 ###  Descompresión
 ```sh
 ./ejecutar.sh -d <nombre de fichero>
+./ejecutar.sh -d experimentacion/test5_largo.txt.huf           
+
 ```
 Produce `nombre de fichero.orig` (archivo restaurado).
 
 ### Compresión con longitud limitada
 ```sh
 ./ejecutar.sh -l <longitud máxima> -c <nombre de fichero>
+./ejecutar.sh -l 6 -c experimentacion/test1_frecuencias_similares.txt
 ```
 Produce `nombre de fichero.huf`
 
