@@ -46,8 +46,15 @@ Produce `nombre de fichero.huf`
 ## 📌 5. Comprobación de integridad 
 Comparar archivos:
 ```sh
-diff mon_texte.txt mon_texte.txt.orig
+diff test.txt test.txt.orig
 ```
  **Si no aparece ningún mensaje, ¡la compresión y descompresión funcionan correctamente!**
+
+ ### Verificar el tamaño de un archivo:
+```sh
+ls -lh test.txt
+ls -lh test.txt.huf
+```
+Esto muestra el tamaño del archivo original y el archivo comprimido en un formato legible.
 
  
